@@ -38,7 +38,6 @@ export default function ParentDashboard() {
       },
     ],
   })
-
   const [categoryData, setCategoryData] = useState({
     labels: ['Education', 'Entertainment', 'Social', 'Other'],
     datasets: [
@@ -54,7 +53,6 @@ export default function ParentDashboard() {
       },
     ],
   })
-
   const [suggestions, setSuggestions] = useState([])
 
   useEffect(() => {
@@ -74,7 +72,6 @@ export default function ParentDashboard() {
       const suggestionsData = await suggestionsResponse.json()
       setSuggestions(suggestionsData)
     }
-
     fetchData()
   }, [])
 
@@ -90,44 +87,32 @@ export default function ParentDashboard() {
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
+          transition={{ duration: 0.5 }}
           className="bg-white p-6 rounded-lg shadow-md"
         >
-          <h2 className="text-2xl font-semibold mb-4">Daily Screen Time</h2>
+          <h2 className="text-xl font-semibold mb-4">Daily Screen Time</h2>
           <Line data={screenTimeData} />
         </motion.div>
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
+          transition={{ duration: 0.5 }}
           className="bg-white p-6 rounded-lg shadow-md"
         >
-          <h2 className="text-2xl font-semibold mb-4">Screen Time by Category</h2>
+          <h2 className="text-xl font-semibold mb-4">Screen Time by Category</h2>
           <Bar data={categoryData} />
         </motion.div>
       </div>
-      <motion.div
-        initial={{ y: 50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="mt-8 bg-white p-6 rounded-lg shadow-md"
-      >
-        <h2 className="text-2xl font-semibold mb-4">AI Suggestions</h2>
-        <ul className="space-y-2">
+      <div className="mt-8">
+        <h2 className="text-xl font-semibold mb-4">AI Suggestions</h2>
+        <ul>
           {suggestions.map((suggestion, index) => (
-            <motion.li
-              key={index}
-              initial={{ x: -50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.8 + index * 0.1 }}
-              className="flex items-center"
-            >
-              <span className="text-purple-600 mr-2">•</span>
+            <li key={index} className="mb-2">
               {suggestion}
-            </motion.li>
+            </li>
           ))}
         </ul>
-      </motion.div>
+      </div>
     </motion.div>
   )
 }

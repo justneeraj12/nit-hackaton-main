@@ -2,7 +2,7 @@
 
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Eye, EyeOff, Mail } from 'lucide-react'
 import dynamic from 'next/dynamic'
@@ -14,6 +14,10 @@ export default function ParentLogin() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
+
+  useEffect(() => {
+    // Any client-side logic can go here
+  }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -38,11 +42,10 @@ export default function ParentLogin() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  placeholder="Enter your email"
+                  className="block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-opacity-50"
                   required
                 />
-                <Mail className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" />
+                <Mail className="absolute right-3 top-3 text-gray-400" />
               </div>
             </div>
             <div>
@@ -55,37 +58,25 @@ export default function ParentLogin() {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  placeholder="Enter your password"
+                  className="block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-opacity-50"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-2.5 text-gray-400 focus:outline-none"
+                  className="absolute right-3 top-3 text-gray-400"
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5" />
-                  ) : (
-                    <Eye className="h-5 w-5" />
-                  )}
+                  {showPassword ? <EyeOff /> : <Eye />}
                 </button>
               </div>
             </div>
-            <AnimatedComponent>
-              <button
-                type="submit"
-                className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors duration-300"
-              >
-                Sign In
-              </button>
-            </AnimatedComponent>
+            <button
+              type="submit"
+              className="w-full py-2 px-4 bg-purple-600 text-white rounded-md hover:bg-purple-700 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-opacity-50"
+            >
+              Login
+            </button>
           </form>
-          <div className="mt-6 text-center">
-            <a href="#" className="text-sm text-purple-600 hover:text-purple-800">
-              Forgot password?
-            </a>
-          </div>
         </div>
       </AnimatedComponent>
     </div>
